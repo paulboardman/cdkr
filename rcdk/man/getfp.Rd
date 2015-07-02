@@ -23,8 +23,20 @@
   \item shortestpath - A fingerprint based on the shortest paths between pairs of atoms and takes into account ring systems, charges etc.
   \item signature - A feature,count type of fingerprint, similar in nature to circular fingerprints, but based on the signature 
     descriptor
-  \item circular - An implementation of the ECFP6 fingerprint
+  \item circular - An implementation of the ECFP/FCFP fingerprint. This has 8 available types selected using the cfp_class parameter:
+    \itemize{
+      \item 1 - ECFP0
+      \item 2 - ECFP2
+      \item 3 - ECFP4
+      \item 4 - ECFP6
+      \item 5 - FCFP0
+      \item 6 - FCFP2
+      \item 7 - FCFP4
+      \item 8 - FCFP6
+      }
   }
+  The circular fingerprint has 8 available classes:
+
 
   Depending on whether the input is a single \code{IAtomContainer}
   object, a list or single vector is returned. Each element of the list 
@@ -33,7 +45,7 @@
 }
 \usage{
     get.fingerprint(molecule, type = 'standard', 
-                    fp.mode = 'bit', depth=6, size=1024, verbose=FALSE)
+                    fp.mode = 'bit', depth=6, size=1024, cfp_type=4, verbose=FALSE)
 }
 \arguments{
   \item{molecule}{An \code{IAtomContainer} object that can be obtained
@@ -50,6 +62,7 @@
   'pubchem', 'maccs', 'kr' and 'estate' fingerprints}
   \item{size}{The length of the fingerprint bit string. This argument is ignored for the
   'pubchem', 'maccs', 'kr', 'signature', 'circular' and 'estate' fingerprints}
+  \item{cfp_type}{CircularFingerprinter class type}
   \item{verbose}{If \code{TRUE}, exceptions, if they occur, will be printed}
 }
 \value{

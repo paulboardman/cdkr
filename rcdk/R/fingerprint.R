@@ -1,4 +1,4 @@
-get.fingerprint <- function(molecule, type = 'standard', fp.mode = 'bit', depth=6, size=1024, verbose=FALSE) {
+get.fingerprint <- function(molecule, type = 'standard', fp.mode = 'bit', depth=6, size=1024, cfp_type=4, verbose=FALSE) {
   if (is.null(attr(molecule, 'jclass'))) stop("Must supply an IAtomContainer or something coercable to it")
   if (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
     ## try casting it
@@ -21,7 +21,7 @@ get.fingerprint <- function(molecule, type = 'standard', fp.mode = 'bit', depth=
            kr = .jnew('org/openscience/cdk/fingerprint/KlekotaRothFingerprinter'),
            shortestpath = .jnew('org/openscience/cdk/fingerprint/ShortestPathFingerprinter', size),
            signature = .jnew('org/openscience/cdk/fingerprint/SignatureFingerprinter', depth),
-           circular = .jnew('org/openscience/cdk/fingerprint/CircularFingerprinter'),
+           circular = .jnew('org/openscience/cdk/fingerprint/CircularFingerprinter', cfp_type, size),
            )
   if (is.null(fingerprinter)) stop("Invalid fingerprint type specified")
 
